@@ -52,9 +52,9 @@ Data has been obtained from **real sales orders** in 18 countries in a period of
 
 # Data Preparation
 
-We know from domain knowledge that every row of the dataset is a different  order.
+We import the CSV and we put it into a dataframe with pandas. We know from domain knowledge that every row of the dataset is a different  order.
 
-```df1.head()```
+`df1.head()`
 
 <table class="dataframe" border="0">
   <thead>
@@ -113,7 +113,7 @@ We know from domain knowledge that every row of the dataset is a different  orde
 
 Also, we notice that the date is expressed as week of the year, so for better analysis we convert it to year-month-day format with the datetime package. Also we rename 'revenue' to 'monetary' per convention in the RFM analysis.
 
-```df2.head()```
+`df2.head()`
 
 <table class="dataframe" border="0">
   <thead>
@@ -172,10 +172,10 @@ Also, we notice that the date is expressed as week of the year, so for better an
 
 # Raw Data Description
 
-```df2.info()```
+`df2.info()`
 
 ```
-class 'pandas.core.frame.DataFrame'&gt;
+class 'pandas.core.frame.DataFrame';
 RangeIndex: 235574 entries, 0 to 235573
 Data columns (total 5 columns):
  #   Column    Non-Null Count   Dtype         
@@ -189,7 +189,7 @@ dtypes: datetime64[ns](1), float64(1), int64(2), object(1)
 memory usage: 9.0+ MB
 ```
 
-```df2.describe()```
+`df2.describe()`
 
 <table class="dataframe" border="0">
   <thead>
@@ -256,13 +256,13 @@ We see we have 235,574 transactions in the period of time included in the datase
 
 Let's view the period of time included in the dataset:
 
-```df2['date'].min()```
+`df2['date'].min()`
 
 ```
 Timestamp('2019-01-07 00:00:00')
 ```
 
-```df2['date'].max()```
+`df2['date'].max()`
 
 ```
 Timestamp('2020-11-30 00:00:00')
@@ -270,7 +270,7 @@ Timestamp('2020-11-30 00:00:00')
 
 Let's explore in how many different countries we have sales in that period:
 
-```df2['country'].unique()```
+`df2['country'].unique()`
 
 ```
 array(['KR', 'PK', 'MM', 'VN', 'IN', 'SA', 'PH', 'AF', 'CN', 'BD', 'ID',
@@ -279,7 +279,7 @@ array(['KR', 'PK', 'MM', 'VN', 'IN', 'SA', 'PH', 'AF', 'CN', 'BD', 'ID',
 
 With the dataprep.clean package we can get the full country names:
 
-```clean_country(df2, "country")['country_clean'].unique()```
+`clean_country(df2, "country")['country_clean'].unique()`
 
 ```
 array(['South Korea', 'Pakistan', 'Myanmar', 'Vietnam', 'India',
@@ -290,7 +290,7 @@ array(['South Korea', 'Pakistan', 'Myanmar', 'Vietnam', 'India',
 
 Total number of customers in all countries:
 
-```df2['id'].nunique()```
+`df2['id'].nunique()`
 
 ```
 21837
@@ -300,9 +300,9 @@ Total number of customers in all countries:
 
 For greater visibility in the plots we convert the dates to monthly periods:
 
-```df2c = df2b.to_period("M")```
+`df2c = df2b.to_period("M")`
 
-```df2c.head()```
+`df2c.head()`
 
 <table class="dataframe" border="0">
   <thead>
@@ -364,13 +364,13 @@ We aggregate the units and revenue of the same period.
 
 Units chart:
 
-```df2c['units'].groupby('date').agg(sum).plot(figsize=(20,5));```
+`df2c['units'].groupby('date').agg(sum).plot(figsize=(20,5));``
 
 <img src="https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/units.png" width="800">
 
 Revenue chart:
 
-```df2c['monetary'].groupby('date').agg(sum).plot(figsize=(20,5));```
+`df2c['monetary'].groupby('date').agg(sum).plot(figsize=(20,5));`
 
 <img src="https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/monetary.png" width="800">
 
