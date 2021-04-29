@@ -252,7 +252,7 @@ memory usage: 9.0+ MB
   </tbody>
 </table>
 
-We see we have 235,574 transactions in the period of time included in the dataset. The biggest transaction was 150,000 units. But it seems there was a return of that amount as well, -150,000 units. The most expensive purchase was 2.41 Millions.
+We see we have 235,574 transactions and 5 columns in the period of time included in the dataset. The biggest transaction was 150,000 units. But it seems there was a return of that amount as well, -150,000 units. The most expensive purchase was 2.41 Millions.
 
 Let's view the period of time included in the dataset:
 
