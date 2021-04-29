@@ -364,7 +364,7 @@ We aggregate the units and revenue of the same period.
 
 Units chart:
 
-`df2c['units'].groupby('date').agg(sum).plot(figsize=(20,5));``
+`df2c['units'].groupby('date').agg(sum).plot(figsize=(20,5));`
 
 <img src="https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/units.png" width="800">
 
@@ -384,7 +384,15 @@ Revenue chart:
 
 # Front-end
 
+![Customer Segmentation](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/customer_segmentation.png?raw=true)
 
+![RFM Analysis](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/rfm_analysis.png?raw=true)
+
+<img src="https://github.com/daniel-isidro/customer_segmentation/blob/main/media/reference.png?raw=true" width="800"><br>
+
+<img src="https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_need_attention.png?raw=true" width="800"><br>
+
+<img src="https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_at_risk.png?raw=true" width="800"><br>
 
 ### User Manual
 
