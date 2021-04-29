@@ -388,11 +388,11 @@ Revenue chart:
 
 ![RFM Analysis](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/rfm_analysis.png?raw=true)
 
-<img src="https://github.com/daniel-isidro/customer_segmentation/blob/main/media/reference.png?raw=true" width="800"><br>
+![Reference](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/reference.png?raw=true)
 
-<img src="https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_need_attention.png?raw=true" width="800"><br>
+![Country - Need Attention](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_need_attention.png?raw=true)
 
-<img src="https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_at_risk.png?raw=true" width="800"><br>
+![Country - At Risk](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_at_risk.png?raw=true)
 
 ### User Manual
 
