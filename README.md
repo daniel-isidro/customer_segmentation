@@ -376,7 +376,403 @@ Revenue chart:
 
 # Modeling
 
+## Transforming the data to obtain RFM values
 
+We will transform the data to assign each customer some scores depending on the purchases they did. Prior to that, we will create some new features 'recency', 'frequency', as long as the previoulsy created 'monetary' feature.
+
+**Recency** will be the minimum of 'days_since_last_purchase' for each customer.
+
+**Frequency** will be the total number of orders in the period for each customer.
+
+**Monetary**, will be the total value of the purchases in the period for each customer.
+
+We will focus on sales from last 365 days since the most recent date.
+
+**TIP:** There are customers with the same 'id' in several countries. This causes errors in the monetary values. We will solve this by creating a new feature: a unique 'id+' identifier that combines country code and customer id.
+
+`df3['id+'] = df3['country'].map(str) + df3['id'].map(str)`
+
+`df3.head()`
+
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>id</th>
+      <th>monetary</th>
+      <th>units</th>
+      <th>date</th>
+      <th>id+</th>
+      <th>days_since_purchase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>KR</td>
+      <td>4375152</td>
+      <td>773.58</td>
+      <td>1</td>
+      <td>2019-12-16</td>
+      <td>KR4375152</td>
+      <td>351</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>KR</td>
+      <td>705462</td>
+      <td>337.26</td>
+      <td>1</td>
+      <td>2019-12-09</td>
+      <td>KR705462</td>
+      <td>358</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>KR</td>
+      <td>705462</td>
+      <td>337.26</td>
+      <td>1</td>
+      <td>2019-12-23</td>
+      <td>KR705462</td>
+      <td>344</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>KR</td>
+      <td>705462</td>
+      <td>421.56</td>
+      <td>2</td>
+      <td>2019-12-16</td>
+      <td>KR705462</td>
+      <td>351</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>KR</td>
+      <td>706854</td>
+      <td>391.50</td>
+      <td>1</td>
+      <td>2019-12-09</td>
+      <td>KR706854</td>
+      <td>358</td>
+    </tr>
+  </tbody>
+</table>
+
+The result will be a dataframe that contains three new columns.
+
+`rfm.head()`
+
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>id+</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>600018</td>
+      <td>CN600018</td>
+      <td>CN</td>
+      <td>29</td>
+      <td>7</td>
+      <td>21402.78</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>600060</td>
+      <td>CN600060</td>
+      <td>CN</td>
+      <td>155</td>
+      <td>1</td>
+      <td>1201.14</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>600462</td>
+      <td>CN600462</td>
+      <td>CN</td>
+      <td>211</td>
+      <td>2</td>
+      <td>2033.64</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600888</td>
+      <td>CN600888</td>
+      <td>CN</td>
+      <td>8</td>
+      <td>3</td>
+      <td>2335.80</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>601014</td>
+      <td>CN601014</td>
+      <td>CN</td>
+      <td>225</td>
+      <td>1</td>
+      <td>230.52</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Calculating the R, F and M scores
+
+No we'll assign a rate between 1 and 5 depending on recency, monetary and frequency parameters. We'll use the quintiles method, dividing every feature on groups that contain 20 % of the samples.
+
+Higher values are better for frequency and monetary, while lower values are better for recency. Those will be the asssigned R, F and M scores to each customer.
+
+Then we concatenate R, F and M values to obtain a combined RFM score per customer.
+
+`rfm.head()`
+
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>600018</td>
+      <td>CN</td>
+      <td>29</td>
+      <td>7</td>
+      <td>21402.78</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+      <td>445</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>600060</td>
+      <td>CN</td>
+      <td>155</td>
+      <td>1</td>
+      <td>1201.14</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>600462</td>
+      <td>CN</td>
+      <td>211</td>
+      <td>2</td>
+      <td>2033.64</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>222</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600888</td>
+      <td>CN</td>
+      <td>8</td>
+      <td>3</td>
+      <td>2335.80</td>
+      <td>5</td>
+      <td>3</td>
+      <td>3</td>
+      <td>533</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>601014</td>
+      <td>CN</td>
+      <td>225</td>
+      <td>1</td>
+      <td>230.52</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>211</td>
+    </tr>
+  </tbody>
+</table>
+
+With this rfm scores we would have 125 segments of customers, which is too much for any practical analysis. To get a more simple segmentation, we choose to create a new feature 'fm' that combines 'f' and 'm' scores.
+
+```
+def truncate(x):
+    return math.trunc(x)
+
+rfm['fm'] = ((rfm['f'] + rfm['m'])/2).apply(lambda x: truncate(x))
+```
+
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+      <th>fm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>600018</td>
+      <td>CN</td>
+      <td>29</td>
+      <td>7</td>
+      <td>21402.78</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+      <td>445</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>600060</td>
+      <td>CN</td>
+      <td>155</td>
+      <td>1</td>
+      <td>1201.14</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>212</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>600462</td>
+      <td>CN</td>
+      <td>211</td>
+      <td>2</td>
+      <td>2033.64</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>222</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600888</td>
+      <td>CN</td>
+      <td>8</td>
+      <td>3</td>
+      <td>2335.80</td>
+      <td>5</td>
+      <td>3</td>
+      <td>3</td>
+      <td>533</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>601014</td>
+      <td>CN</td>
+      <td>225</td>
+      <td>1</td>
+      <td>230.52</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>211</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+Then We create a segment map of only 11 segments based on only two scores, 'r' and 'fm'. We assign each customer a different segment.
+
+```
+segment_map = {
+    r'22': 'hibernating',
+    r'[1-2][1-2]': 'lost',
+    r'15': 'can\'t lose',
+    r'[1-2][3-5]': 'at risk',
+    r'3[1-2]': 'about to sleep',
+    r'33': 'need attention',
+    r'55': 'champions',
+    r'[3-5][4-5]': 'loyal customers',
+    r'41': 'promising',
+    r'51': 'new customers',
+    r'[4-5][2-3]': 'potential loyalists'
+}
+
+rfm['segment'] = rfm['r'].map(str) + rfm['fm'].map(str)
+rfm['segment'] = rfm['segment'].replace(segment_map, regex=True)
+```
+
+## Segment description
+
+* **Champions**	Bought recently, buy often and spend the most
+* **Loyal Customers**	Buy on a regular basis. Responsive to promotions.
+* **Potential Loyalists**	Recent customers with average frequency.
+* **Recent Customers**	Bought most recently, but not often.
+* **Promising**	Recent shoppers, but haven’t spent much.
+* **Customers Needing Attention**	Above average recency, frequency and monetary values. May not have bought very recently though.
+* **About To Sleep**	Below average recency and frequency. Will lose them if not reactivated.
+* **At Risk**	Purchased often but a long time ago. Need to bring them back!
+* **Can’t Lose Them**	Used to purchase frequently but haven’t returned for a long time.
+* **Hibernating**	Last purchase was long back and low number of orders.
+* **Lost** Purchased long time ago and never came back.
+
+## Exploring the customers segments
+
+We take a look at some segments.
+
+rfm[rfm['segment']=="can't lose"].sort_values(by='monetary', ascending=False)
+
+rfm[rfm['segment']=="need attention"].sort_values(by='monetary', ascending=False).head(10)
+
+rfm[rfm['segment']=='loyal customers'].sort_values(by='monetary', ascending=False).head(10)
+
+rfm[rfm['segment']=='champions'].sort_values(by='monetary', ascending=False).head(10)
+
+rfm['monetary'].mean()
+
+# Customers with monetary over the average that need attention
+
+rfm[(rfm['monetary']>rfm['monetary'].mean()) & (rfm['segment']=='need attention')]\
+    .sort_values(by='monetary', ascending=False)
+
+Let's do a scatter plot to explore the distribution of customers. Using a colormap for the m score, we see that the majority of customers who spend the most also purchase more frequently.
+
+plt.rcParams["figure.figsize"] = (20, 5)
+rfm.plot.scatter(x='recency', y='frequency', c='m', cmap='rainbow');
+
+
+Finally we export the dataframe to a CSV file for later processing it in Power BI.
+
+`rfm.to_csv('rfm_asia.csv', encoding='utf-8', index=False, float_format='%.2f')` 
 
 # Summary
 
