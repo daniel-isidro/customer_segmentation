@@ -616,7 +616,7 @@ Then we concatenate R, F and M values to obtain a combined RFM score per custome
   </tbody>
 </table>
 
-With this rfm scores we would have 125 segments of customers, which is too much for any practical analysis. To get a more simple segmentation, we choose to create a new feature 'fm' that combines 'f' and 'm' scores.
+With this rfm scores we would have 125 segments of customers, which is too much for any practical analysis. To get a more simple segmentation, we choose to create a new feature 'fm' that is the rounded down mean of 'f' and 'm' scores.
 
 `def truncate(x):
     return math.trunc(x)`
@@ -708,7 +708,7 @@ With this rfm scores we would have 125 segments of customers, which is too much 
   </tbody>
 </table>
 
-Then We create a segment map of only 11 segments based on only two scores, 'r' and 'fm'. We assign to each customer a different segment.
+Then we create a segment map of only 11 segments based on only two scores, 'r' and 'fm'. We assign to each customer a different segment.
 
 <table class="dataframe" border="0">
   <thead>
@@ -720,9 +720,6 @@ Then We create a segment map of only 11 segments based on only two scores, 'r' a
       <th>frequency</th>
       <th>monetary</th>
       <th>r</th>
-      <th>f</th>
-      <th>m</th>
-      <th>rfm_score</th>
       <th>fm</th>
       <th>segment</th>
     </tr>
@@ -737,9 +734,6 @@ Then We create a segment map of only 11 segments based on only two scores, 'r' a
       <td>21402.78</td>
       <td>4</td>
       <td>4</td>
-      <td>5</td>
-      <td>445</td>
-      <td>4</td>
       <td>loyal customers</td>
     </tr>
     <tr>
@@ -750,9 +744,6 @@ Then We create a segment map of only 11 segments based on only two scores, 'r' a
       <td>1</td>
       <td>1201.14</td>
       <td>2</td>
-      <td>1</td>
-      <td>2</td>
-      <td>212</td>
       <td>1</td>
       <td>lost</td>
     </tr>
@@ -765,9 +756,6 @@ Then We create a segment map of only 11 segments based on only two scores, 'r' a
       <td>2033.64</td>
       <td>2</td>
       <td>2</td>
-      <td>2</td>
-      <td>222</td>
-      <td>2</td>
       <td>hibernating</td>
     </tr>
     <tr>
@@ -779,9 +767,6 @@ Then We create a segment map of only 11 segments based on only two scores, 'r' a
       <td>2335.80</td>
       <td>5</td>
       <td>3</td>
-      <td>3</td>
-      <td>533</td>
-      <td>3</td>
       <td>potential loyalists</td>
     </tr>
     <tr>
@@ -792,9 +777,6 @@ Then We create a segment map of only 11 segments based on only two scores, 'r' a
       <td>1</td>
       <td>230.52</td>
       <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>211</td>
       <td>1</td>
       <td>lost</td>
     </tr>
@@ -834,9 +816,6 @@ We take a look at some segments.
       <th>frequency</th>
       <th>monetary</th>
       <th>r</th>
-      <th>f</th>
-      <th>m</th>
-      <th>rfm_score</th>
       <th>fm</th>
       <th>segment</th>
     </tr>
@@ -851,9 +830,6 @@ We take a look at some segments.
       <td>220267.86</td>
       <td>1</td>
       <td>5</td>
-      <td>5</td>
-      <td>155</td>
-      <td>5</td>
       <td>can't lose</td>
     </tr>
     <tr>
@@ -864,9 +840,6 @@ We take a look at some segments.
       <td>10</td>
       <td>102208.02</td>
       <td>1</td>
-      <td>5</td>
-      <td>5</td>
-      <td>155</td>
       <td>5</td>
       <td>can't lose</td>
     </tr>
@@ -879,9 +852,6 @@ We take a look at some segments.
       <td>91909.44</td>
       <td>1</td>
       <td>5</td>
-      <td>5</td>
-      <td>155</td>
-      <td>5</td>
       <td>can't lose</td>
     </tr>
     <tr>
@@ -893,9 +863,6 @@ We take a look at some segments.
       <td>70506.96</td>
       <td>1</td>
       <td>5</td>
-      <td>5</td>
-      <td>155</td>
-      <td>5</td>
       <td>can't lose</td>
     </tr>
     <tr>
@@ -906,9 +873,6 @@ We take a look at some segments.
       <td>26</td>
       <td>42535.14</td>
       <td>1</td>
-      <td>5</td>
-      <td>5</td>
-      <td>155</td>
       <td>5</td>
       <td>can't lose</td>
     </tr>
@@ -930,9 +894,6 @@ We take a look at some segments.
       <th>frequency</th>
       <th>monetary</th>
       <th>r</th>
-      <th>f</th>
-      <th>m</th>
-      <th>rfm_score</th>
       <th>fm</th>
       <th>segment</th>
     </tr>
@@ -947,9 +908,6 @@ We take a look at some segments.
       <td>2315341.14</td>
       <td>3</td>
       <td>5</td>
-      <td>5</td>
-      <td>355</td>
-      <td>5</td>
       <td>loyal customers</td>
     </tr>
     <tr>
@@ -960,9 +918,6 @@ We take a look at some segments.
       <td>50</td>
       <td>1519339.86</td>
       <td>4</td>
-      <td>5</td>
-      <td>5</td>
-      <td>455</td>
       <td>5</td>
       <td>loyal customers</td>
     </tr>
@@ -975,9 +930,6 @@ We take a look at some segments.
       <td>1492057.68</td>
       <td>4</td>
       <td>5</td>
-      <td>5</td>
-      <td>455</td>
-      <td>5</td>
       <td>loyal customers</td>
     </tr>
     <tr>
@@ -988,9 +940,6 @@ We take a look at some segments.
       <td>9</td>
       <td>736626.96</td>
       <td>4</td>
-      <td>4</td>
-      <td>5</td>
-      <td>445</td>
       <td>4</td>
       <td>loyal customers</td>
     </tr>
@@ -1011,9 +960,6 @@ We take a look at some segments.
       <th>frequency</th>
       <th>monetary</th>
       <th>r</th>
-      <th>f</th>
-      <th>m</th>
-      <th>rfm_score</th>
       <th>fm</th>
       <th>segment</th>
     </tr>
@@ -1028,9 +974,6 @@ We take a look at some segments.
       <td>21482332.56</td>
       <td>5</td>
       <td>5</td>
-      <td>5</td>
-      <td>555</td>
-      <td>5</td>
       <td>champions</td>
     </tr>
     <tr>
@@ -1041,9 +984,6 @@ We take a look at some segments.
       <td>104</td>
       <td>16912322.46</td>
       <td>5</td>
-      <td>5</td>
-      <td>5</td>
-      <td>555</td>
       <td>5</td>
       <td>champions</td>
     </tr>
@@ -1056,9 +996,6 @@ We take a look at some segments.
       <td>16550997.90</td>
       <td>5</td>
       <td>5</td>
-      <td>5</td>
-      <td>555</td>
-      <td>5</td>
       <td>champions</td>
     </tr>
     <tr>
@@ -1070,9 +1007,6 @@ We take a look at some segments.
       <td>8748884.64</td>
       <td>5</td>
       <td>5</td>
-      <td>5</td>
-      <td>555</td>
-      <td>5</td>
       <td>champions</td>
     </tr>
     <tr>
@@ -1083,9 +1017,6 @@ We take a look at some segments.
       <td>198</td>
       <td>6207519.96</td>
       <td>5</td>
-      <td>5</td>
-      <td>5</td>
-      <td>555</td>
       <td>5</td>
       <td>champions</td>
     </tr>
