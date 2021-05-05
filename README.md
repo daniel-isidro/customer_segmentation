@@ -1037,9 +1037,6 @@ We take a look at some segments.
       <th>frequency</th>
       <th>monetary</th>
       <th>r</th>
-      <th>f</th>
-      <th>m</th>
-      <th>rfm_score</th>
       <th>fm</th>
       <th>segment</th>
     </tr>
@@ -1053,9 +1050,6 @@ We take a look at some segments.
       <td>1</td>
       <td>73823.58</td>
       <td>3</td>
-      <td>1</td>
-      <td>5</td>
-      <td>315</td>
       <td>3</td>
       <td>need attention</td>
     </tr>
@@ -1067,9 +1061,6 @@ We take a look at some segments.
       <td>2</td>
       <td>67257.48</td>
       <td>3</td>
-      <td>2</td>
-      <td>5</td>
-      <td>325</td>
       <td>3</td>
       <td>need attention</td>
     </tr>
@@ -1081,9 +1072,6 @@ We take a look at some segments.
       <td>1</td>
       <td>59700.00</td>
       <td>3</td>
-      <td>1</td>
-      <td>5</td>
-      <td>315</td>
       <td>3</td>
       <td>need attention</td>
     </tr>
@@ -1095,9 +1083,6 @@ We take a look at some segments.
       <td>2</td>
       <td>34730.22</td>
       <td>3</td>
-      <td>2</td>
-      <td>5</td>
-      <td>325</td>
       <td>3</td>
       <td>need attention</td>
     </tr>
@@ -1109,9 +1094,6 @@ We take a look at some segments.
       <td>1</td>
       <td>29961.00</td>
       <td>3</td>
-      <td>1</td>
-      <td>5</td>
-      <td>315</td>
       <td>3</td>
       <td>need attention</td>
     </tr>
