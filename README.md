@@ -618,12 +618,10 @@ Then we concatenate R, F and M values to obtain a combined RFM score per custome
 
 With this rfm scores we would have 125 segments of customers, which is too much for any practical analysis. To get a more simple segmentation, we choose to create a new feature 'fm' that combines 'f' and 'm' scores.
 
-```
-def truncate(x):
-    return math.trunc(x)
+`def truncate(x):
+    return math.trunc(x)`
 
-rfm['fm'] = ((rfm['f'] + rfm['m'])/2).apply(lambda x: truncate(x))
-```
+`rfm['fm'] = ((rfm['f'] + rfm['m'])/2).apply(lambda x: truncate(x))`
 
 <table class="dataframe" border="0">
   <thead>
@@ -710,26 +708,98 @@ rfm['fm'] = ((rfm['f'] + rfm['m'])/2).apply(lambda x: truncate(x))
   </tbody>
 </table>
 
-Then We create a segment map of only 11 segments based on only two scores, 'r' and 'fm'. We assign each customer a different segment.
+Then We create a segment map of only 11 segments based on only two scores, 'r' and 'fm'. We assign to each customer a different segment.
 
-```
-segment_map = {
-    r'22': 'hibernating',
-    r'[1-2][1-2]': 'lost',
-    r'15': 'can\'t lose',
-    r'[1-2][3-5]': 'at risk',
-    r'3[1-2]': 'about to sleep',
-    r'33': 'need attention',
-    r'55': 'champions',
-    r'[3-5][4-5]': 'loyal customers',
-    r'41': 'promising',
-    r'51': 'new customers',
-    r'[4-5][2-3]': 'potential loyalists'
-}
-
-rfm['segment'] = rfm['r'].map(str) + rfm['fm'].map(str)
-rfm['segment'] = rfm['segment'].replace(segment_map, regex=True)
-```
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+      <th>fm</th>
+      <th>segment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>600018</td>
+      <td>CN</td>
+      <td>29</td>
+      <td>7</td>
+      <td>21402.78</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+      <td>445</td>
+      <td>4</td>
+      <td>loyal customers</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>600060</td>
+      <td>CN</td>
+      <td>155</td>
+      <td>1</td>
+      <td>1201.14</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>212</td>
+      <td>1</td>
+      <td>lost</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>600462</td>
+      <td>CN</td>
+      <td>211</td>
+      <td>2</td>
+      <td>2033.64</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>222</td>
+      <td>2</td>
+      <td>hibernating</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600888</td>
+      <td>CN</td>
+      <td>8</td>
+      <td>3</td>
+      <td>2335.80</td>
+      <td>5</td>
+      <td>3</td>
+      <td>3</td>
+      <td>533</td>
+      <td>3</td>
+      <td>potential loyalists</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>601014</td>
+      <td>CN</td>
+      <td>225</td>
+      <td>1</td>
+      <td>230.52</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>211</td>
+      <td>1</td>
+      <td>lost</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Segment description
 
@@ -745,34 +815,385 @@ rfm['segment'] = rfm['segment'].replace(segment_map, regex=True)
 * **Hibernating**	Last purchase was long back and low number of orders.
 * **Lost** Purchased long time ago and never came back.
 
-## Exploring the customers segments
+## Exploring the customer segments
 
 We take a look at some segments.
 
-rfm[rfm['segment']=="can't lose"].sort_values(by='monetary', ascending=False)
+**Can't lose**
 
-rfm[rfm['segment']=="need attention"].sort_values(by='monetary', ascending=False).head(10)
+`rfm[rfm['segment']=="can't lose"].sort_values(by='monetary', ascending=False)
+`
 
-rfm[rfm['segment']=='loyal customers'].sort_values(by='monetary', ascending=False).head(10)
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+      <th>fm</th>
+      <th>segment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>13028</th>
+      <td>4096386</td>
+      <td>JP</td>
+      <td>260</td>
+      <td>105</td>
+      <td>220267.86</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>155</td>
+      <td>5</td>
+      <td>can't lose</td>
+    </tr>
+    <tr>
+      <th>3502</th>
+      <td>2443284</td>
+      <td>IN</td>
+      <td>246</td>
+      <td>10</td>
+      <td>102208.02</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>155</td>
+      <td>5</td>
+      <td>can't lose</td>
+    </tr>
+    <tr>
+      <th>14174</th>
+      <td>4262646</td>
+      <td>IN</td>
+      <td>316</td>
+      <td>10</td>
+      <td>91909.44</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>155</td>
+      <td>5</td>
+      <td>can't lose</td>
+    </tr>
+    <tr>
+      <th>2435</th>
+      <td>1803672</td>
+      <td>IN</td>
+      <td>267</td>
+      <td>12</td>
+      <td>70506.96</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>155</td>
+      <td>5</td>
+      <td>can't lose</td>
+    </tr>
+    <tr>
+      <th>13254</th>
+      <td>4132968</td>
+      <td>VN</td>
+      <td>253</td>
+      <td>26</td>
+      <td>42535.14</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+      <td>155</td>
+      <td>5</td>
+      <td>can't lose</td>
+    </tr>
+  </tbody>
+</table>
 
-rfm[rfm['segment']=='champions'].sort_values(by='monetary', ascending=False).head(10)
+**Loyal customers**
 
-rfm['monetary'].mean()
+`rfm[rfm['segment']=='loyal customers'].sort_values(by='monetary', ascending=False).head()
+`
 
-# Customers with monetary over the average that need attention
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+      <th>fm</th>
+      <th>segment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>15420</th>
+      <td>4422780</td>
+      <td>TR</td>
+      <td>92</td>
+      <td>13</td>
+      <td>2315341.14</td>
+      <td>3</td>
+      <td>5</td>
+      <td>5</td>
+      <td>355</td>
+      <td>5</td>
+      <td>loyal customers</td>
+    </tr>
+    <tr>
+      <th>2882</th>
+      <td>2030526</td>
+      <td>JP</td>
+      <td>22</td>
+      <td>50</td>
+      <td>1519339.86</td>
+      <td>4</td>
+      <td>5</td>
+      <td>5</td>
+      <td>455</td>
+      <td>5</td>
+      <td>loyal customers</td>
+    </tr>
+    <tr>
+      <th>3220</th>
+      <td>2182446</td>
+      <td>JP</td>
+      <td>29</td>
+      <td>18</td>
+      <td>1492057.68</td>
+      <td>4</td>
+      <td>5</td>
+      <td>5</td>
+      <td>455</td>
+      <td>5</td>
+      <td>loyal customers</td>
+    </tr>
+    <tr>
+      <th>12660</th>
+      <td>4041366</td>
+      <td>PK</td>
+      <td>50</td>
+      <td>9</td>
+      <td>736626.96</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+      <td>445</td>
+      <td>4</td>
+      <td>loyal customers</td>
+    </tr>
+    </tbody>
+</table>
 
-rfm[(rfm['monetary']>rfm['monetary'].mean()) & (rfm['segment']=='need attention')]\
-    .sort_values(by='monetary', ascending=False)
+**Champions**
 
-Let's do a scatter plot to explore the distribution of customers. Using a colormap for the m score, we see that the majority of customers who spend the most also purchase more frequently.
+`rfm[rfm['segment']=='champions'].sort_values(by='monetary', ascending=False).head()`
 
-plt.rcParams["figure.figsize"] = (20, 5)
-rfm.plot.scatter(x='recency', y='frequency', c='m', cmap='rainbow');
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+      <th>fm</th>
+      <th>segment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>173</th>
+      <td>638544</td>
+      <td>CN</td>
+      <td>1</td>
+      <td>217</td>
+      <td>21482332.56</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>555</td>
+      <td>5</td>
+      <td>champions</td>
+    </tr>
+    <tr>
+      <th>15436</th>
+      <td>4424580</td>
+      <td>CN</td>
+      <td>1</td>
+      <td>104</td>
+      <td>16912322.46</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>555</td>
+      <td>5</td>
+      <td>champions</td>
+    </tr>
+    <tr>
+      <th>14754</th>
+      <td>4341960</td>
+      <td>TR</td>
+      <td>1</td>
+      <td>200</td>
+      <td>16550997.90</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>555</td>
+      <td>5</td>
+      <td>champions</td>
+    </tr>
+    <tr>
+      <th>11942</th>
+      <td>3929094</td>
+      <td>ID</td>
+      <td>1</td>
+      <td>470</td>
+      <td>8748884.64</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>555</td>
+      <td>5</td>
+      <td>champions</td>
+    </tr>
+    <tr>
+      <th>9626</th>
+      <td>3520734</td>
+      <td>JP</td>
+      <td>1</td>
+      <td>198</td>
+      <td>6207519.96</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>555</td>
+      <td>5</td>
+      <td>champions</td>
+    </tr>
+  </tbody>
+</table>
 
+**Customers with monetary over the average that need attention**
+
+`rfm[(rfm['monetary']>rfm['monetary'].mean()) & (rfm['segment']=='need attention')].sort_values(by='monetary', ascending=False).head()`
+
+<table class="dataframe" border="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>country</th>
+      <th>recency</th>
+      <th>frequency</th>
+      <th>monetary</th>
+      <th>r</th>
+      <th>f</th>
+      <th>m</th>
+      <th>rfm_score</th>
+      <th>fm</th>
+      <th>segment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8245</th>
+      <td>3242664</td>
+      <td>TR</td>
+      <td>64</td>
+      <td>1</td>
+      <td>73823.58</td>
+      <td>3</td>
+      <td>1</td>
+      <td>5</td>
+      <td>315</td>
+      <td>3</td>
+      <td>need attention</td>
+    </tr>
+    <tr>
+      <th>13065</th>
+      <td>4107798</td>
+      <td>JP</td>
+      <td>120</td>
+      <td>2</td>
+      <td>67257.48</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+      <td>325</td>
+      <td>3</td>
+      <td>need attention</td>
+    </tr>
+    <tr>
+      <th>9847</th>
+      <td>3561900</td>
+      <td>ID</td>
+      <td>120</td>
+      <td>1</td>
+      <td>59700.00</td>
+      <td>3</td>
+      <td>1</td>
+      <td>5</td>
+      <td>315</td>
+      <td>3</td>
+      <td>need attention</td>
+    </tr>
+    <tr>
+      <th>6626</th>
+      <td>2921070</td>
+      <td>ID</td>
+      <td>71</td>
+      <td>2</td>
+      <td>34730.22</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+      <td>325</td>
+      <td>3</td>
+      <td>need attention</td>
+    </tr>
+    <tr>
+      <th>10009</th>
+      <td>3587772</td>
+      <td>CN</td>
+      <td>92</td>
+      <td>1</td>
+      <td>29961.00</td>
+      <td>3</td>
+      <td>1</td>
+      <td>5</td>
+      <td>315</td>
+      <td>3</td>
+      <td>need attention</td>
+    </tr>
+  </tbody>
+</table>
+
+Let's do a scatter plot to explore the distribution of customers, with 'monetary' on the x-axis. Using a colormap for the 'm' score, we see that the majority of customers who spend the most also purchase more frequently.
+
+![Scatterplot](https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/scatter.png)
 
 Finally we export the dataframe to a CSV file for later processing it in Power BI.
 
-`rfm.to_csv('rfm_asia.csv', encoding='utf-8', index=False, float_format='%.2f')` 
+`rfm.to_csv('rfm_asia.csv', encoding='utf-8', index=False, float_format='%.2f')`
 
 # Summary
 
