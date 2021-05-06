@@ -19,11 +19,15 @@
 
 # Introduction
 
+I currently work in a company that serves goods to thousands of customers in several countries. I wanted to **create a tool** that would be useful to the sales managers in those countries by quickly showcasing what customers to contact next, in order to **grow sales** and **customer retention**. That is how I came to know about RFM analysis.
 
+**RFM** is a method used for analyzing customer value. It is commonly used in database marketing and direct marketing and has received particular attention in retail and professional services industries.
+
+This project focuses on doing RFM analysis on my company sales and creating a **data visualization dashboard** showcasing **customer segmentation** that I can share with my colleagues in the countries.
 
 # Methodology
 
-Using a dataset that contains **sales orders** in a period of time, we will use **Python** to obtain the frequency, recency and monetary values in the last 365 days per customer. Later with those values we will give **R, F, and M scores** to each customer, that will allow us to cluster them in different **segments**.
+Using a dataset that contains **sales orders** in a period of time, we will use **Python** to obtain the **frequency, recency** and **monetary** values in the last 365 days per customer. Later with those values we will give **R, F, and M scores** to each customer, that will allow us to cluster them in different **segments**.
 
 # Requirements
 
@@ -111,7 +115,7 @@ We import the CSV and we put it into a dataframe with pandas. We know from domai
   </tbody>
 </table>
 
-Also, we notice that the date is expressed as week of the year, so for better analysis we convert it to year-month-day format with the datetime package. Also we rename 'revenue' to 'monetary' per convention in the RFM analysis.
+Also, we notice that the date is expressed as **week of the year**, so for better analysis we convert it to **year-month-day** format with the datetime package. Also we rename 'revenue' to 'monetary' per convention in the RFM analysis.
 
 `df2.head()`
 
@@ -252,7 +256,7 @@ memory usage: 9.0+ MB
   </tbody>
 </table>
 
-We see we have 235,574 transactions and 5 columns in the period of time included in the dataset. The biggest transaction was 150,000 units. But it seems there was a return of that amount as well, -150,000 units. The most expensive purchase was 2.41 Millions.
+We see we have **235,574 transactions** and 5 **columns** in the period of time included in the dataset. The biggest transaction was 150,000 units. But it seems there was a return of that amount as well, -150,000 units. The most expensive purchase was 2.41 Millions.
 
 Let's view the period of time included in the dataset:
 
