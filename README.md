@@ -23,7 +23,7 @@
 
 # Methodology
 
-
+Using a dataset that contains **sales orders** in a period of time, we will use **Python** to obtain the frequency, recency and monetary values in the last 365 days per customer. Later with those values we will give **R, F, and M scores** to each customer, that will allow us to cluster them in different **segments**.
 
 # Requirements
 
@@ -48,7 +48,7 @@ For replicating the project, please execute the following steps in order:
 
 # Data Acquisition
 
-Data has been obtained from **real sales orders** in 18 countries in a period of around 2 years. Some features (country names, customer id and revenue), have been altered in order to preserve privacy. Number of orders, units and dates have not been modified. It is acquired as a CSV file.
+Data has been obtained from **real sales orders** in 18 countries in a period of around 2 years. Some features (country names, customer id and revenue), have been altered in order to preserve privacy. Number of orders, units and dates have not been modified. It is acquired as a [CSV file](https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/data/sales_asia.csv).
 
 # Data Preparation
 
