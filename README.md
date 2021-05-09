@@ -1,5 +1,8 @@
 # Customer Segmentation Analysis with RFM, using Python and Power BI
 
+![Header](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/header.jpg?raw=true)
+<p style="font-size:8px;"><a href='https://www.freepik.com/vectors/business'>Business vector created by vectorjuice - www.freepik.com</a></p>
+
 # Table of Contents
 
 [Introduction](#introduction) <br>
