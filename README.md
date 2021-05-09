@@ -470,7 +470,7 @@ We will focus on sales from last 365 days since the most recent date.
   </tbody>
 </table>
 
-The result will be a dataframe that contains three new columns.
+The result will be a dataframe that contains two new columns: 'recency' and 'frequency'.
 
 `rfm.head()`
 
