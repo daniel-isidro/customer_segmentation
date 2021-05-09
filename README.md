@@ -1124,7 +1124,7 @@ We can display some customer segments in the dataframe.
   </tbody>
 </table>
 
-Let's do a scatter plot to explore the distribution of customers, with 'monetary' on the x-axis. Using a colormap for the 'm' score, we see that the majority of customers who spend the most also purchase more frequently.
+Let's do a scatter plot to explore the distribution of customers, with 'recency' on the x-axis and 'frequency' in the y-axis. Using the 'monetary' values as size of the points, we see that the majority of customers who spend the most also purchase more frequently.
 
 ![Scatterplot](https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/scatter.png)
 
