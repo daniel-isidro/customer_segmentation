@@ -22,11 +22,13 @@
 
 # Introduction
 
-While working in a company that serves goods to thousands of customers in several countries, I wanted to **create a tool** that would be useful to the sales managers in those countries by quickly showcasing what customers to contact next, in order to **grow sales** and **customer retention**. That is how I came to know about RFM analysis.
+While working in a company that serves goods to thousands of customers in several countries, I wanted to **create a tool** that would be useful to the sales managers in those countries by quickly showcasing **what customers to contact next**, in order to **grow sales** and **customer retention**. That is how I came to know about RFM analysis.
 
 **RFM** is a method used for analyzing customer value. It is commonly used in database marketing and direct marketing and has received particular attention in retail and professional services industries.
 
 This project focuses on doing RFM analysis on company sales and creating a **data visualization dashboard** showcasing **customer segmentation** that I can share with colleagues in the countries.
+
+![Customer Segmentation Small](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/customer_segmentation_small.png?raw=true)
 
 # Methodology
 
@@ -792,7 +794,7 @@ Then we create a segment map of only 11 segments based on only two scores, 'r' a
 
 # Summary
 
-After aggregating sales, frequency and recency values for each customer, and assigning 'r', 'f' and 'm' scores depending on those values, we have given each customer a different segment label. Let's have a look on what those segments mean.
+After aggregating sales, frequency and recency values for each customer, and assigning 'r' and 'fm' scores depending on those values, we have given each customer a different segment label. Let's have a look on what those segments mean.
 
 ## Segment description
 
@@ -1142,7 +1144,7 @@ We observe that a lot of our customers (32 %) are **lost** or **hibernating** (t
 
 ### User Manual
 
-We can share the dashboard with our country sales managers so they can be guided to the customer id's on the different segments and take specific actions on them. Let's view an example: my Chinese colleague needs to be guided on what customers to contact next to **improve customer retention** or to **increase sales**. They would just need to open this dashboard, click on country (top right) and then on customer segment **need attention** or at **risk**, to have a specific list of customers, ordered by revenue spent in the last 365 days. (An unedited dataset would also include customer names and contact details, which in this case have been omitted for privacy reasons).
+We can share the dashboard with our country sales managers so they can be **guided to the customer id's on the different segments** and **take specific actions on them**. Let's view an example: my Chinese colleague needs to be guided on what customers to contact next to **improve customer retention** or to **increase sales**. They would just need to open this dashboard, click on country (top right) and then on customer segment **need attention** or at **risk**, to have a specific list of customers, ordered by revenue spent in the last 365 days. (An unedited dataset would also include customer names and contact details, which in this case have been omitted for privacy reasons).
 
 ![Country - Need Attention](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_need_attention.png?raw=true)
 
@@ -1154,7 +1156,7 @@ A **reference guide** to the 11 segments and suggested actions per segment is in
 
 # Conclusions
 
-
+**Customer segmentation** with the **RFM** methodology in sales is an effective way to help employees to focus their efforts by **targeting customers on a priority basis** and taking different actions on them. This kind of project **flexible** as the number of segments can be adapted to the business needs, and the period of time in the analysis can be extended or reduced as well. The use of Power BI to **share** the dashboard to colleagues in an enterprise environment is very convenient for companies already working in the Microsoft ecosystem.
 
 # References
 
