@@ -1,6 +1,6 @@
 # Customer Segmentation Analysis with RFM, using Python and Power BI
 
-![Header](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/header.jpg?raw=true)
+![Header](https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/header.jpg)
 <p style="font-size:8px;"><a href='https://www.freepik.com/vectors/business'>Business vector created by vectorjuice - www.freepik.com</a></p>
 
 # Table of Contents
@@ -22,11 +22,11 @@
 
 # Introduction
 
-I currently work in a company that serves goods to thousands of customers in several countries. I wanted to **create a tool** that would be useful to the sales managers in those countries by quickly showcasing what customers to contact next, in order to **grow sales** and **customer retention**. That is how I came to know about RFM analysis.
+While working in a company that serves goods to thousands of customers in several countries, I wanted to **create a tool** that would be useful to the sales managers in those countries by quickly showcasing what customers to contact next, in order to **grow sales** and **customer retention**. That is how I came to know about RFM analysis.
 
 **RFM** is a method used for analyzing customer value. It is commonly used in database marketing and direct marketing and has received particular attention in retail and professional services industries.
 
-This project focuses on doing RFM analysis on my company sales and creating a **data visualization dashboard** showcasing **customer segmentation** that I can share with my colleagues in the countries.
+This project focuses on doing RFM analysis on company sales and creating a **data visualization dashboard** showcasing **customer segmentation** that I can share with colleagues in the countries.
 
 # Methodology
 
@@ -790,6 +790,10 @@ Then we create a segment map of only 11 segments based on only two scores, 'r' a
   </tbody>
 </table>
 
+# Summary
+
+After aggregating sales, frequency and recency values for each customer, and assigning 'r', 'f' and 'm' scores depending on those values, we have given each customer a different segment label. Let's have a look on what those segments mean.
+
 ## Segment description
 
 * **Champions**	Bought recently, buy often and spend the most
@@ -806,11 +810,11 @@ Then we create a segment map of only 11 segments based on only two scores, 'r' a
 
 ## Exploring the customer segments
 
-We take a look at some segments.
+We can display some customer segments in the dataframe.
 
 **Can't lose**
 
-`rfm[rfm['segment']=="can't lose"].sort_values(by='monetary', ascending=False)
+`rfm[rfm['segment']=="can't lose"].sort_values(by='monetary', ascending=False).head()
 `
 
 <table class="dataframe" border="0">
@@ -947,6 +951,17 @@ We take a look at some segments.
       <td>9</td>
       <td>736626.96</td>
       <td>4</td>
+      <td>4</td>
+      <td>loyal customers</td>
+    </tr>
+    <tr>
+      <th>5612</th>
+      <td>2853774</td>
+      <td>VN</td>
+      <td>8</td>
+      <td>6</td>
+      <td>712230.00</td>
+      <td>5</td>
       <td>4</td>
       <td>loyal customers</td>
     </tr>
@@ -1115,10 +1130,6 @@ Finally we export the dataframe to a CSV file for later processing it in Power B
 
 `rfm.to_csv('rfm_asia.csv', encoding='utf-8', index=False, float_format='%.2f')`
 
-# Summary
-
-
-
 # Front-end
 
 The front-end of this project consists in a **Power BI dashboard** that processes the CSV resulting from executing the previous Python code, and visualizes the results in a pleasing dashboard. That dashboard then can be shared with multiple colleagues in the different countries of the company. You can access that file [here](https://github.com/daniel-isidro/customer_segmentation/blob/main/output/customer_segmentation.pbix) for exploring it.
@@ -1140,10 +1151,6 @@ We can share the dashboard with our country sales managers so they can be guided
 A **reference guide** to the 11 segments and suggested actions per segment is included in the last tab of the dashboard.
 
 ![Reference](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/reference.png?raw=true)
-
-
-
-
 
 # Conclusions
 
