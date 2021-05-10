@@ -1124,7 +1124,7 @@ We can display some customer segments in the dataframe.
   </tbody>
 </table>
 
-Let's do a scatter plot to explore the distribution of customers, with 'recency' on the x-axis and 'frequency' in the y-axis. Using the 'monetary' values as size of the points, we see that the majority of customers who spend the most also purchase more frequently.
+Let's do a scatter plot to explore the distribution of customers, with 'recency' on the x-axis and 'frequency' in the y-axis. Using the 'monetary' values as size of the points, we see that the majority of customers who **spend the most** also purchase **more recently** and **more frequently**.
 
 ![Scatterplot](https://raw.githubusercontent.com/daniel-isidro/customer_segmentation/main/media/scatter.png)
 
@@ -1144,7 +1144,7 @@ We observe that a lot of our customers (32 %) are **lost** or **hibernating** (t
 
 ### User Manual
 
-We can share the dashboard with our country sales managers so they can be **guided to the customer id's on the different segments** and **take specific actions on them**. Let's view an example: my Chinese colleague needs to be guided on what customers to contact next to **improve customer retention** or to **increase sales**. They would just need to open this dashboard, click on country (top right) and then on customer segment **need attention** or at **risk**, to have a specific list of customers, ordered by revenue spent in the last 365 days. (An unedited dataset would also include customer names and contact details, which in this case have been omitted for privacy reasons).
+We can share the dashboard with our country sales managers so they can be **guided to the customer id's on the different segments** and **take specific actions on them**. Let's view an example: my Chinese colleague needs to be guided on what customers to contact next to **improve customer retention** or to **increase sales**. They would just need to open this dashboard, click on country (top right) and then on customer segment **need attention** or **at risk**, to have a specific list of customers, ordered by revenue spent in the last 365 days. (An unedited dataset would also include customer names and contact details, which in this case have been omitted for privacy reasons).
 
 ![Country - Need Attention](https://github.com/daniel-isidro/customer_segmentation/blob/main/media/cs_cn_need_attention.png?raw=true)
 
@@ -1156,7 +1156,7 @@ A **reference guide** to the 11 segments and suggested actions per segment is in
 
 # Conclusions
 
-**Customer segmentation** with the **RFM** methodology in sales is an effective way to help employees to focus their efforts by **targeting customers on a priority basis** and taking different actions on them. This kind of project **flexible** as the number of segments can be adapted to the business needs, and the period of time in the analysis can be extended or reduced as well. The use of Power BI to **share** the dashboard to colleagues in an enterprise environment is very convenient for companies already working in the Microsoft ecosystem.
+**Customer segmentation** with the **RFM** methodology in sales is an effective way to help employees to focus their efforts by **targeting customers on a priority basis** and taking different actions on them. This kind of project **flexible** as the number of segments can be adapted to the business needs, and the period of time in the analysis can be extended or reduced as well. The use of Power BI to **share** the dashboard to colleagues in an enterprise environment as a web app is very convenient for companies already working in the Microsoft ecosystem.
 
 # References
 
